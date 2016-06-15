@@ -1,0 +1,133 @@
+@charset "UTF-8";
+/*
+ * 一些公用的样式
+ * 
+ */
+.g-flow {
+  width: 1206px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 1205px) {
+  .g-flow {
+    width: 960px;
+  }
+}
+
+.u-more {
+  color: #21a557;
+}
+.u-more:hover {
+  text-decoration: underline;
+  color: #21a557;
+}
+
+.f-fr {
+  float: right;
+}
+
+.f-fl {
+  float: left;
+}
+
+.f-cb {
+  zoom: 1;
+}
+.f-cb:after {
+  content: ".";
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+.f-ib {
+  display: inline-block;
+}
+
+.f-pr {
+  position: relative;
+}
+
+/*
+ *头部和提示信息样式
+ */
+body, html {
+  min-width: 960px;
+}
+
+.m-tips {
+  height: 36px;
+  background-color: #f3f3f3;
+}
+.m-tips p {
+  line-height: 36px;
+  font-family: "microsoft yahei";
+}
+.m-tips .u-close {
+  font-size: 20px;
+  line-height: 0;
+  vertical-align: -2px;
+}
+
+.m-top {
+  height: 90px;
+}
+.m-top .m-watch {
+  display: inline-block;
+  height: 22px;
+  line-height: 22px;
+  padding: 31px 0 37px;
+}
+.m-top .m-watch .fans {
+  margin-left: 7px;
+}
+.m-top .u-watch {
+  display: inline-block;
+  width: 54px;
+  height: 21px;
+  border-radius: 2px;
+  border: none;
+  margin: 0 14px 0 30px;
+  vertical-align: middle;
+  background-color: #21a557;
+  color: #fff;
+}
+.m-top .u-watch .u-add {
+  font-weight: bold;
+  font-size: 14px;
+  vertical-align: -2px;
+}
+.m-top .m-search {
+  height: 22px;
+  line-height: 22px;
+  padding: 31px 0 37px;
+  vertical-align: bottom;
+}
+.m-top .m-search .u-links {
+  font: 16px "Arial", "Hiragino Sans GB", \5fae\8f6f\96c5\9ed1, "Helvetica", "sans-serif";
+}
+.m-top .m-search .u-links li {
+  display: inline-block;
+  margin-left: 56px;
+}
+.m-top .m-search .u-links a:hover {
+  color: #39a030;
+}
+.m-top .m-search .search {
+  width: 20px;
+  height: 18px;
+  margin-left: 26px;
+  background: url("/img/icon.png") no-repeat 0 0;
+  cursor: pointer;
+}
+
+.m-slide {
+  height: 462px;
+  background-color: red;
+}
+
+.m-info {
+  height: 30px;
+  background-color: yellow;
+}

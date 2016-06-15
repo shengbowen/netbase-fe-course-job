@@ -1,0 +1,53 @@
+/*
+ * 一些公用的样式
+ * 
+ */
+
+// 响应式布局
+.g-flow{
+    width: 1206px;
+    margin: 0 auto;
+    @media screen and (max-width: 1205px){
+        width: 960px;
+    }
+}
+
+
+.u-more{
+    color: $U_MORE_COLOR;
+    &:hover{
+        text-decoration: underline;
+        color: $U_MORE_COLOR;
+    }
+}
+
+
+
+//一些功能样式
+.f-fr{
+    float: right;
+}
+
+.f-fl{
+    float: left;
+}
+
+.f-cb{
+    zoom: 1;
+    &:after{
+        content: ".";
+        display: block;
+        visibility: hidden;
+        clear: both;
+        height: 0;
+        overflow: hidden;
+    }
+}
+
+.f-ib{
+    display: inline-block;
+}
+
+.f-pr{
+    position: relative;
+}

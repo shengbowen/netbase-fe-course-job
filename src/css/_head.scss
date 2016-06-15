@@ -1,0 +1,88 @@
+/*
+ *头部和提示信息样式
+ */
+
+body, html{
+    min-width: 960px;
+}
+
+.m-tips{
+    height: $TIP_HEIGHT;
+    background-color: $TIP_BG_COLOR;
+    p{
+        line-height: $TIP_HEIGHT;
+        font-family: "microsoft yahei";
+    }
+    .u-close{
+        font-size: 20px;
+        line-height: 0;  //不设为0 会导致下方的浮动元素不能浮动到最右边
+        vertical-align: -2px; //修复元素与文字大小不对齐问题，参见张鑫旭vertical-align
+    }
+}
+
+.m-top{
+    height: 90px;
+    // .u-logo{
+    //     height: 90px;
+    // }
+    .m-watch{
+        display: inline-block;
+        height:22px;
+        line-height:22px;
+        padding: 31px 0 37px;
+        .fans{
+            margin-left: 7px;
+        }
+    }
+    .u-watch{
+        display: inline-block;
+        width: 54px;
+        height: 21px;
+        border-radius: 2px;
+        border:none;
+        margin: 0 14px 0 30px;
+        vertical-align: middle;
+        background-color: #21a557;
+        color: #fff;
+        .u-add{
+            font-weight: bold;
+            font-size: 14px;
+            vertical-align: -2px;
+        }
+    }
+
+    .m-search{
+        height:22px;
+        line-height:22px;
+        padding: 31px 0 37px;
+        vertical-align: bottom;
+        .u-links{
+            font: 16px $FONT-FAMILY;
+            li{
+                display: inline-block;
+                margin-left: 56px;
+            }
+            a:hover{
+                color: $GREEN;
+            }
+        }
+        .search{
+            width: 20px;
+            height: 18px;
+            margin-left: 26px;
+            background: url('/img/icon.png') no-repeat 0 0;
+            cursor: pointer;
+        }
+    }
+}
+
+.m-slide{
+    height: 462px;
+    background-color: red;
+}
+
+.m-info{
+    height: 30px;
+    background-color: yellow;
+
+}
