@@ -49,24 +49,187 @@
             <div class="m-slide f-pr">
                 
             </div>
-            <div class="g-flow m-info">
-                
+            <!-- 这里为了实现三列自适应，并且居中，使用了margin-left技巧，增加元素的宽度 , 并使用display：table-->
+            <div class="g-flow">
+                <div class="g-parent-fix">
+                    <article class="m-info">
+                        <section class="column f-cb">
+                            <figure class="info_icon f-fl open163"></figure>
+                            <article class="info_art f-oh">
+                                <h2>网易公开课</h2>
+                                <p>推出国内外名校公开课，涉及广泛的学科，名校老师认真讲解深度剖析，网易公开课频道搭建起强有力的网络视频教学平台</p>
+                                <a href="http://open.163.com/" class="u-more" target="_blank">了解更多&gt;</a>
+                            </article>
+                        </section>
+                        <section class="column f-cb">
+                            <figure class="info_icon f-fl study163"></figure>
+                            <article class="info_art f-oh">
+                                <h2>云课堂</h2>
+                                <p>网易旗下大型在线学习平台，该平台面向学习者提供海量免费、优质课程，创新的个性化学习体验，自由开放的交流互动环境</p>
+                                <a href="http://study.163.com/" class="u-more" target="_blank">了解更多&gt;</a>
+                            </article>
+                        </section>
+                        <section class="column f-cb">
+                            <figure class="info_icon f-fl icourse163"></figure>
+                            <article class="info_art f-oh">
+                                <h2>中国大学MOOC</h2>
+                                <p>是爱课程网携手云课堂打造的在线学习平台，每一个有提升愿望的人，都可以在这里学习中国最好的大学课程，学完还能获得认证证书</p>
+                                <a href="http://www.icourse163.org/" class="u-more" target="_blank">了解更多&gt;</a>
+                            </article>
+                        </section>
+                    </article>
+                </div>
             </div>
+            <!-- 图片轮播2 -->
+            <div class="m-slide2"></div>
         </aside>
         
     </header> <!-- /header 网站头部 -->
     
-    <main class="g-bd">
-        <section>
-            
-        </section>
-        <div class="g-mn">
-            demo1
+    <!-- 网站的主体部分,课程信息自适应剩余宽度 -->
+    <main class="g-bd g-flow">
+        <!-- 侧栏固定宽度,并且右浮动到最右边 -->
+        <aside class="m-aside f-fr">
+            <!-- 机构介绍 -->
+            <div class="panel">
+                <div class="p_title">机构介绍</div>
+                <div class="p_video">
+                    <p>观看下面的视频了解吧：</p>
+                    <video src="" height="110px"></video>
+                </div>
+            </div>
+            <!-- 最热课程 -->
+            <div class="panel">
+                <div class="p_title">最热排行</div>
+                <ul class="hot_list">
+                    <li class="list_item f-cb">
+                        <a href="#" target="_blank" title="课程" class="f-fl"><img src="../img/icon2.png" alt="" width="50" height="50"></a>
+                        <div class="item_info f-oh">
+                            <a href="#"><h3 class="f-elipsis">舞曲揭秘影月揭秘sdf </h3></a>
+                            <div class="like">
+                                <span class="user_icon"></span>
+                                <span class="like_sum">510</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list_item f-cb">
+                        <a href="#" target="_blank" title="课程" class="f-fl"><img src="../img/icon2.png" alt="" width="50" height="50"></a>
+                        <div class="item_info f-oh">
+                            <a href="#"><h3 class="f-elipsis">舞曲揭秘影月揭秘sdf </h3></a>
+                            <div class="like">
+                                <span class="user_icon"></span>
+                                <span class="like_sum">510</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list_item f-cb">
+                        <a href="#" target="_blank" title="课程" class="f-fl"><img src="../img/icon2.png" alt="" width="50" height="50"></a>
+                        <div class="item_info f-oh">
+                            <a href="#"><h3 class="f-elipsis">舞曲揭秘影月揭秘sdf </h3></a>
+                            <div class="like">
+                                <span class="user_icon"></span>
+                                <span class="like_sum">510</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- 课程展示自适应剩余宽度，使用float使每行显示的课程数目随窗口大小自适应 -->
+        <div class="m-banner f-oh">
+            <div class="u-tabs">
+                <div class="tab z-selected">产品设计</div>
+                <div class="tab">编程语言</div>
+            </div>
+            <article class="m-courses f-cb">
+                <section class="course">
+                    <div class="course_link">
+                        <div class="img f-oh">
+                            <img class="pic" src="../img/pic1.jpg" alt="混音全揭秘">
+                        </div>
+                        <h3 class="f-elipsis title">混音全揭秘 舞曲实战篇 揭秘音乐揭秘音乐的美丽</h3>
+                    </div>
+                    <div class="course_info">
+                        <p><a href="#">音频帮</a></p>
+                        <div class="like">
+                            <span class="user_icon"></span>
+                            <span class="like_sum">510</span>
+                        </div>
+                        <div class="price">&yen; 800.00</div>
+                    </div>
+                </section>
+                <section class="course">
+                    <div class="course_link">
+                        <div class="img f-oh">
+                            <img class="pic" src="../img/pic1.jpg" alt="混音全揭秘">
+                        </div>
+                        <h3 class="f-elipsis title">混音全揭秘 舞曲实战篇 揭秘音乐揭秘音乐的美丽</h3>
+                    </div>
+                    <div class="course_info">
+                        <p><a href="#">音频帮</a></p>
+                        <div class="like">
+                            <span class="user_icon"></span>
+                            <span class="like_sum">510</span>
+                        </div>
+                        <div class="price">&yen; 800.00</div>
+                    </div>
+                </section>
+                <section class="course">
+                    <div class="course_link">
+                        <div class="img f-oh">
+                            <img class="pic" src="../img/pic1.jpg" alt="混音全揭秘">
+                        </div>
+                        <h3 class="f-elipsis title">混音全揭秘 舞曲实战篇 揭秘音乐揭秘音乐的美丽</h3>
+                    </div>
+                    <div class="course_info">
+                        <p><a href="#">音频帮</a></p>
+                        <div class="like">
+                            <span class="user_icon"></span>
+                            <span class="like_sum">510</span>
+                        </div>
+                        <div class="price">&yen; 800.00</div>
+                    </div>
+                </section>
+                <section class="course">
+                    <div class="course_link">
+                        <div class="img f-oh">
+                            <img class="pic" src="../img/pic1.jpg" alt="混音全揭秘">
+                        </div>
+                        <h3 class="f-elipsis title">混音全揭秘 舞曲实战篇 揭秘音乐揭秘音乐的美丽</h3>
+                    </div>
+                    <div class="course_info">
+                        <p><a href="#">音频帮</a></p>
+                        <div class="like">
+                            <span class="user_icon"></span>
+                            <span class="like_sum">510</span>
+                        </div>
+                        <div class="price">&yen; 800.00</div>
+                    </div>
+                </section>
+                <section class="course">
+                    <div class="course_link">
+                        <div class="img f-oh">
+                            <img class="pic" src="../img/pic1.jpg" alt="混音全揭秘">
+                        </div>
+                        <h3 class="f-elipsis title">混音全揭秘 舞曲实战篇 揭秘音乐揭秘音乐的美丽</h3>
+                    </div>
+                    <div class="course_info">
+                        <p><a href="#">音频帮</a></p>
+                        <div class="like">
+                            <span class="user_icon"></span>
+                            <span class="like_sum">510</span>
+                        </div>
+                        <div class="price">&yen; 800.00</div>
+                    </div>
+                </section>
+                <section class="course"></section>
+            </article>
+            <!-- 分页器 -->
+            <div class="m-page"></div>
         </div>
-        <div class="g-sd">
-            demo1234
-        </div>
-    </main>
+        
+        
+    </main><!-- /main网站主体结束 -->
 
     <footer class="g-ft">
     </footer>

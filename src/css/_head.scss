@@ -4,6 +4,11 @@
 
 body, html{
     min-width: 960px;
+    background-color: #f8f8f8;
+}
+
+.g-hd{
+    background-color: #fff;
 }
 
 .m-tips{
@@ -81,8 +86,53 @@ body, html{
     background-color: red;
 }
 
-.m-info{
-    height: 30px;
-    background-color: yellow;
+.m-slide2{
+    height: 234px;
+    background-color: red;
+}
 
+.g-parent-fix{
+    margin-left: -80px;
+    padding: 54px 0;
+}
+
+.m-info{
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+
+    .column{
+        display: table-cell;
+        padding-left: 80px;
+    }
+
+    .info_icon{
+        display: block;
+        margin-top: 10px;
+        width: 80px;
+        height: 80px;
+        background: url('/img/info-icon.png') no-repeat -9999px -9999px;
+    }
+    .open163{
+        background-position: 0 0;
+    }
+    .study163{
+        background-position: 0 -110px;
+    }
+    .icourse163{
+        background-position: 0 -220px;
+    }
+    .info_art{
+        margin-left: 112px;
+    }
+    h2{
+        font: 22px $YAHEI;
+        margin-bottom: 12px;
+    }
+    p, a{
+        font: 14px/24px $YAHEI;
+    }
+    p{
+        margin-bottom: 40px;
+    }
 }

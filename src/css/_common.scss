@@ -51,3 +51,13 @@
 .f-pr{
     position: relative;
 }
+
+.f-oh{
+    overflow: hidden;
+}
+
+.f-elipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
