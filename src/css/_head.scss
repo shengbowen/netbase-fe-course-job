@@ -27,9 +27,9 @@ body, html{
 
 .m-top{
     height: 90px;
-    // .u-logo{
-    //     height: 90px;
-    // }
+    .m-logo{
+        .img{display: block;} //防止外部a标签比img标签大出几个像素
+    }
     .m-watch{
         display: inline-block;
         height:22px;
@@ -63,6 +63,7 @@ body, html{
         vertical-align: bottom;
         .u-links{
             font: 16px $FONT-FAMILY;
+            height: 22px;
             li{
                 display: inline-block;
                 margin-left: 56px;
@@ -81,14 +82,49 @@ body, html{
     }
 }
 
-.m-slide{
-    height: 462px;
-    background-color: red;
+.g-slide{
+    height: 460px;
+    &:hover .u-arrow{
+        display: block;
+    }
+    .u-arrow{
+        cursor: pointer; 
+        display: none; 
+        position: absolute; 
+        line-height: 39px; 
+        text-align: center; 
+        font-size: 36px; 
+        font-family: "simsun";
+        font-weight: bold; 
+        width: 40px; 
+        height: 40px;  
+        z-index: 2; 
+        top: 180px; 
+        background-color: RGBA(0,0,0,.3); 
+        color: #fff;
+        &:hover{
+            background-color: RGBA(0,0,0,.7);
+        }
+    }
+    .u-larrow{left: 20px;}
+    .u-rarrow{right: 20px;}
+    
 }
 
-.m-slide2{
-    height: 234px;
-    background-color: red;
+
+.m-photos{
+    height: 220px;
+    .list{
+        position: absolute;
+        width: 1616px;
+        left: 50%;
+        margin-left: -808px;
+        li{
+            display: inline-block;
+            width: 320px;
+            height: 220px;
+        }
+    }   
 }
 
 .g-parent-fix{

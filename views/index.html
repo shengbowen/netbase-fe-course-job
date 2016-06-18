@@ -5,8 +5,9 @@
 <title>网易云课堂实战项目</title>
 <meta name="keywords" content="网易 云课堂 项目实战"/>
 <meta name="description" content="这是最后的大作业"/>
-<meta name="viewport" content="width=device-width"/>
+<meta name="viewport" content="width=device-width initial-scale=1, maximum-scale=1, user-scalable=no"/>
 <link rel="stylesheet" href="../dist/css/reset.css">
+<link rel="stylesheet" href="../src/js/widget/slide/style.css">
 <link rel="stylesheet" href="../dist/css/style.css"/>
 <link rel="shortcut icon" href="img/favicon.ico"/>
 <link rel="apple-touch-icon" href="img/touchicon.png"/>
@@ -27,7 +28,7 @@
 
         <div class="g-flow m-top f-cb">
             <div class="m-logo f-fl">
-                <a href="#" class="f-fl"><img src="../img/logo1.png" alt="logo" title="网易教育产品部" width="236" height="90" /></a>
+                <a href="#" class="f-fl"><img class="img" src="../img/logo1.png" alt="logo" title="网易教育产品部" width="236" height="90" /></a>
                 <div class="m-watch">
                     <button class="u-watch"><span class="u-add">+</span> 关注</button>
                     粉丝<span id="fans" class="fans">45</span>
@@ -46,8 +47,15 @@
         </div>
         <!-- slide和一些介绍信息 -->
         <aside>
-            <div class="m-slide f-pr">
-                
+            <!-- slide的容器 -->
+            <div class="g-slide f-pr" id="gslide">
+                <ul class="m-cursor">
+                  <li class='cursor'></li>
+                  <li class='cursor'></li>
+                  <li class='cursor'></li>
+                </ul>
+                <a href="javascript:;"  class="u-arrow u-larrow">&lt;</a>
+                <a href="javascript:;"  class="u-arrow u-rarrow">&gt;</a>
             </div>
             <!-- 这里为了实现三列自适应，并且居中，使用了margin-left技巧，增加元素的宽度 , 并使用display：table-->
             <div class="g-flow">
@@ -80,8 +88,16 @@
                     </article>
                 </div>
             </div>
-            <!-- 图片轮播2 -->
-            <div class="m-slide2"></div>
+            <!-- 图片展示区 -->
+            <div class="m-photos f-oh f-pr">
+                <ul class="list">
+                    <li><img src="../img/pic2-1.jpg" alt="" width="320" height="220"></li>
+                    <li><img src="../img/pic2-2.jpg" alt="" width="320" height="220"></li>
+                    <li><img src="../img/pic2-3.jpg" alt="" width="320" height="220"></li>
+                    <li><img src="../img/pic2-4.jpg" alt="" width="320" height="220"></li>
+                    <li><img src="../img/pic2-5.jpg" alt="" width="320" height="220"></li>
+                </ul>
+            </div>
         </aside>
         
     </header> <!-- /header 网站头部 -->
@@ -235,5 +251,77 @@
     </footer>
     
 </div>
+<script type="text/javascript" src="../src/js/util.js"></script>
+<script type="text/javascript" src="../src/js/widget/slide/js/slider.js"></script>
+<script>
+    var slider = new Slider({
+      //视口容器
+      container: document.getElementById('gslide'),
+      // 图片列表
+      images: [
+        "../img/banner1.jpg",
+        "../img/banner2.jpg",
+        "../img/banner3.jpg",
+      ],
+
+      //banner的链接地址
+      links: [
+        "http://open.163.com/",
+        "http://study.163.com/",
+        "http://www.icourse163.org/",
+      ],
+
+      //fadein动画的时常，ms为单位；
+      animateTime: 500,
+      //自动播放的时间间隔, ms为单位
+      interval: 5000
+    });
+
+    var $ = function(selector){
+        return [].slice.call(document.querySelectorAll(selector));
+    }
+
+    var cursors = $('.cursor');
+    var container = $('.g-slide')[0];
+    var larrow = $('.u-larrow')[0];
+    var rarrow = $('.u-rarrow')[0];
+
+    cursors.forEach(function(cursor, index){
+      cursor.addEventListener('click', function(){
+        if(cursor.className.indexOf('z-active')===-1){
+            slider.nav(index);
+        }
+      })
+    })
+
+
+    container.addEventListener('mouseover', function(){
+            slider.stop();
+    });
+
+    container.addEventListener('mouseout',function(){
+        slider.autoPlay();
+    });
+
+    larrow.addEventListener('click', function(){
+        slider.prev();
+    });
+
+    rarrow.addEventListener('click', function(){
+        slider.next();
+    });
+
+    slider.on('nav', function(ev){
+        cursors.forEach(function(cursor, index){
+            if(ev.pageIndex === index){
+                cursor.className = "z-active";
+            }else{
+                cursor.className = "";
+            }
+        });
+    });
+    slider.nav(0);
+    slider.autoPlay();
+</script>
 </body>
 </html>

@@ -49,6 +49,10 @@
   position: relative;
 }
 
+.f-pa {
+  position: absolute;
+}
+
 .f-oh {
   overflow: hidden;
 }
@@ -88,6 +92,9 @@ body, html {
 .m-top {
   height: 90px;
 }
+.m-top .m-logo .img {
+  display: block;
+}
 .m-top .m-watch {
   display: inline-block;
   height: 22px;
@@ -121,6 +128,7 @@ body, html {
 }
 .m-top .m-search .u-links {
   font: 16px "Arial", "Hiragino Sans GB", \5fae\8f6f\96c5\9ed1, "Helvetica", "sans-serif";
+  height: 22px;
 }
 .m-top .m-search .u-links li {
   display: inline-block;
@@ -137,14 +145,51 @@ body, html {
   cursor: pointer;
 }
 
-.m-slide {
-  height: 462px;
-  background-color: red;
+.g-slide {
+  height: 460px;
+}
+.g-slide:hover .u-arrow {
+  display: block;
+}
+.g-slide .u-arrow {
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  line-height: 39px;
+  text-align: center;
+  font-size: 36px;
+  font-family: "simsun";
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  z-index: 2;
+  top: 180px;
+  background-color: RGBA(0, 0, 0, 0.3);
+  color: #fff;
+}
+.g-slide .u-arrow:hover {
+  background-color: RGBA(0, 0, 0, 0.7);
+}
+.g-slide .u-larrow {
+  left: 20px;
+}
+.g-slide .u-rarrow {
+  right: 20px;
 }
 
-.m-slide2 {
-  height: 234px;
-  background-color: red;
+.m-photos {
+  height: 220px;
+}
+.m-photos .list {
+  position: absolute;
+  width: 1616px;
+  left: 50%;
+  margin-left: -808px;
+}
+.m-photos .list li {
+  display: inline-block;
+  width: 320px;
+  height: 220px;
 }
 
 .g-parent-fix {
