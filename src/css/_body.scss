@@ -73,7 +73,7 @@
         }
 
         .like{
-            width: 38px;
+            display:inline-block;
             height: 16px;
             margin-top: 8px;
             margin-bottom: 8px;
@@ -83,7 +83,7 @@
                 display: inline-block;
                 width: 10px;
                 height: 10px;
-                background: url('/img/icon.png') 0 -24px;
+                background: url('../../img/icon.png') 0 -24px;
             }
         }
 
@@ -95,6 +95,7 @@
     }
 }
 
+/*主内容侧边栏样式*/
 .m-aside{
     width: 226px;
     .panel{
@@ -135,10 +136,14 @@
                         display: inline-block;
                         width: 10px;
                         height: 10px;
-                        background: url('/img/icon.png') 0 -24px;
+                        background: url('../../img/icon.png') 0 -24px;
                     }
                 }
             }
     }
 }
 
+/*分页器样式*/
+.m-pagewapper{
+    margin-right: 18px;
+}

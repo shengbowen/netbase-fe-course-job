@@ -141,7 +141,7 @@ body, html {
   width: 20px;
   height: 18px;
   margin-left: 26px;
-  background: url("/img/icon.png") no-repeat 0 0;
+  background: url("../../img/icon.png") no-repeat 0 0;
   cursor: pointer;
 }
 
@@ -164,11 +164,11 @@ body, html {
   height: 40px;
   z-index: 2;
   top: 180px;
-  background-color: RGBA(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   color: #fff;
 }
 .g-slide .u-arrow:hover {
-  background-color: RGBA(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 .g-slide .u-larrow {
   left: 20px;
@@ -211,7 +211,7 @@ body, html {
   margin-top: 10px;
   width: 80px;
   height: 80px;
-  background: url("/img/info-icon.png") no-repeat -9999px -9999px;
+  background: url("../../img/info-icon.png") no-repeat -9999px -9999px;
 }
 .m-info .open163 {
   background-position: 0 0;
@@ -307,7 +307,7 @@ body, html {
   color: #ccc;
 }
 .m-courses .course_info .like {
-  width: 38px;
+  display: inline-block;
   height: 16px;
   margin-top: 8px;
   margin-bottom: 8px;
@@ -318,7 +318,7 @@ body, html {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: url("/img/icon.png") 0 -24px;
+  background: url("../../img/icon.png") 0 -24px;
 }
 .m-courses .course_info .price {
   margin-bottom: 10px;
@@ -326,6 +326,7 @@ body, html {
   font-weight: bold;
 }
 
+/*主内容侧边栏样式*/
 .m-aside {
   width: 226px;
 }
@@ -369,5 +370,10 @@ body, html {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: url("/img/icon.png") 0 -24px;
+  background: url("../../img/icon.png") 0 -24px;
+}
+
+/*分页器样式*/
+.m-pagewapper {
+  margin-right: 18px;
 }

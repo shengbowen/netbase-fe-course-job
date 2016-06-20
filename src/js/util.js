@@ -70,6 +70,65 @@ var util = (function(){
                 return this;
             }
 
+        },
+
+        //ajax相关函数
+        serialize: function(data){
+            if(!data) return '';
+            var pairs = [];
+            for(var name in data){
+                if(!data.hasOwnProperty(name)) continue;
+                if(typeof data[name] === "function") continue;
+                var value = data[name].toString();
+                name = encodeURIComponent(name);
+                value = encodeURIComponent(value);
+                pairs.push(name + '=' + value);
+            }
+            return pairs.join('&');
+        },
+
+        get: function(url, options, callback){
+            var xhr = window.XMLHttpRequest ? (new XMLHttpRequest()) : (new ActiveXObject("Microsoft.XMLHTTP"));
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304){
+                        callback(xhr.responseText);
+                    }else{
+                        alert("Error:" + xhr.status);
+                    }
+                }
+            }
+            xhr.open("GET", url+"?"+this.serialize(options));
+            xhr.send(null);
+        },
+
+        post: function(url, options, callback){
+            var xhr = window.XMLHttpRequest ? (new XMLHttpRequest()) : (new ActiveXObject("Microsoft.XMLHTTP"));
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4){
+                    if(xhr.status >= 200 && xhr.status < 300 || xhr.status === 304){
+                        callback(xhr.responseText);
+                    }else{
+                        alert("Error:" + xhr.status);
+                    }
+                }
+            }
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send(this.serialize(options));
+        },
+
+        //将对象数据渲染进template
+        //dataObj = {data:2}
+        //如模板为<div>{ $data }</div>被渲染成<div>2</div>
+        renderTemplate: function(tempStr, dataObj){
+            if(!dataObj) return;
+            return tempStr.replace(/\{\s+\$([^\s]+)\s+\}/g, function(a, b){
+                return dataObj[b]!==undefined ? dataObj[b] : "";
+            });
         }
+
+        
+
     }
 })();

@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width initial-scale=1, maximum-scale=1, user-scalable=no"/>
 <link rel="stylesheet" href="../dist/css/reset.css">
 <link rel="stylesheet" href="../src/js/widget/slide/style.css">
+<link rel="stylesheet" href="../src/js/widget/paginator/css/paginator.css/paginator.css">
 <link rel="stylesheet" href="../dist/css/style.css"/>
 <link rel="shortcut icon" href="img/favicon.ico"/>
 <link rel="apple-touch-icon" href="img/touchicon.png"/>
@@ -152,13 +153,13 @@
             </div>
         </aside>
         <!-- 课程展示自适应剩余宽度，使用float使每行显示的课程数目随窗口大小自适应 -->
-        <div class="m-banner f-oh">
+        <div class="m-banner f-oh f-cb" id="courseinfo">
             <div class="u-tabs">
                 <div class="tab z-selected">产品设计</div>
                 <div class="tab">编程语言</div>
             </div>
             <article class="m-courses f-cb">
-                <section class="course">
+                <!-- <section class="course">
                     <div class="course_link">
                         <div class="img f-oh">
                             <img class="pic" src="../img/pic1.jpg" alt="混音全揭秘">
@@ -238,12 +239,11 @@
                         <div class="price">&yen; 800.00</div>
                     </div>
                 </section>
-                <section class="course"></section>
-            </article>
+                <section class="course"></section> -->
+            </article><!-- /article 课程列表结束 -->
             <!-- 分页器 -->
-            <div class="m-page"></div>
+            <div class="m-pagewapper f-fr" id="pwapper"></div>
         </div>
-        
         
     </main><!-- /main网站主体结束 -->
 
@@ -253,6 +253,7 @@
 </div>
 <script type="text/javascript" src="../src/js/util.js"></script>
 <script type="text/javascript" src="../src/js/widget/slide/js/slider.js"></script>
+<script type="text/javascript" src="../src/js/widget/paginator/js/paginator.js"></script>
 <script>
     var slider = new Slider({
       //视口容器
@@ -322,6 +323,66 @@
     });
     slider.nav(0);
     slider.autoPlay();
+
+    //获取课程信息
+    // var pager = new Paginator({
+    //     currentPage: 1,
+    //     totalPages: 10,
+    //     container: document.getElementById("pwapper")
+    // });
+    // pager.show(1);
+
+    var options = {
+        container: document.getElementById("pwapper"),
+        pageSize: 20,
+        currentPage: 1
+    };
+
+    var pager;
+    var htmlstr = "";
+    var courseinfo = document.getElementById("courseinfo").getElementsByTagName('article')[0];
+    util.get(
+        'http://study.163.com/webDev/couresByCategory.htm', 
+        {pageNo:options.currentPage,psize:options.pageSize,type:10},
+        function(data){
+            var obj = JSON.parse(data);
+            options.totalPages = obj.totalPage;
+            pager = new Paginator(options);
+            pager.onPageClicked = function(){
+                util.get(
+                    'http://study.163.com/webDev/couresByCategory.htm', 
+                    {pageNo:pager.currentPage,psize:pager.pageSize,type:10},
+                    function(data){
+                        var dataObj = JSON.parse(data);
+                        var template='<section class="course">\
+                                    <div class="course_link">\
+                                        <div class="img f-oh">\
+                                            <img class="pic" src="{ $middlePhotoUrl  }" alt=" { $name } ">\
+                                        </div>\
+                                        <h3 class="f-elipsis title">{ $name }</h3>\
+                                    </div>\
+                                    <div class="course_info">\
+                                        <p><a href="#">{ $provider }</a></p>\
+                                        <div class="like">\
+                                            <span class="user_icon"></span>\
+                                            <span class="like_sum">{ $learnerCount } </span>\
+                                        </div>\
+                                        <div class="price">&yen; { $price }</div>\
+                                    </div>\
+                                </section>';
+                        var list = dataObj.list;
+                        htmlstr = "";
+                        for(var i=0,len=list.length; i<len; i++){
+                            htmlstr += util.renderTemplate(template, list[i]);
+                        }
+                        courseinfo.innerHTML = htmlstr;
+                    });
+            }
+            pager.show(1);
+    });
+
+
+
 </script>
 </body>
 </html>

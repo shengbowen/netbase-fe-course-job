@@ -31,10 +31,11 @@ gulp.task('browser-sync', function(){
 	});
 });
 
-gulp.task('serve', ['sass'],function(){
+gulp.task('serve', ['sass', 'sass1'],function(){
 	browerSync.init({server: "./"});
 	gulp.watch("views/index.html").on('change', reload);
 	gulp.watch("src/css/*.scss", ['sass']);
+	gulp.watch("src/js/widget/paginator/css/*.scss", ['sass1']);
 });
 
 gulp.task('sass', function(){
@@ -42,3 +43,10 @@ gulp.task('sass', function(){
 				.pipe(gulp.dest('dist/css/'))
 				.pipe(reload({stream: true}));
 });
+
+gulp.task('sass1', function(){
+	return sass('src/js/widget/paginator/css/*.scss', {'style': 'expanded'})
+				.pipe(gulp.dest('src/js/widget/paginator/css/paginator.css'))
+				.pipe(reload({stream: true}));
+});
+

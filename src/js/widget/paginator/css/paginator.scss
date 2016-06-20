@@ -1,0 +1,28 @@
+.m-pager{
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font: 14px/20px "microsoft yahei";
+    .u-page, .pleft,.pright{
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        line-height:20px;
+    }
+    .u-page:hover{
+        color: #39a030;
+    }
+    .z-active, .pbn{
+        background-color: #9dd8b1;
+        color: #fff;
+    }
+    .pbn{
+        display: inline-block;
+        width:30px;
+        height: 20px;
+    }
+    .z-disabled{
+        cursor: default;
+        background-color: #e6e6e6;
+    }
+}
