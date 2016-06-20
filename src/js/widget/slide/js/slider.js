@@ -188,7 +188,7 @@
                 }
                 a.href = this.links[this._normIndex(pageIndex + i, this.pageNum)];
                 a.target = "_blank";
-                console.log(this._normIndex(pageIndex + i, this.pageNum));
+                // console.log(this._normIndex(pageIndex + i, this.pageNum));
                 img.src = img.src = this.images[this._normIndex(pageIndex + i, this.pageNum)];
             }
             this.emit('nav', {

@@ -4,7 +4,6 @@
 
 .g-bd{
     margin-top: 80px;
-    height:50px;
 }
 
 .m-banner{
@@ -115,12 +114,13 @@
             font: 14px $YAHEI;
         }
         .hot_list{
-            padding: 18px;
+            height: 730px;
             margin-top: -20px;
         }
 
         .list_item{
                 margin-top: 20px;
+                height: 53px;
             }
             .item_info{
                 margin-left: 60px;
@@ -143,7 +143,53 @@
     }
 }
 
+.m-hotscroll{
+    height: 730px;
+    margin: 20px 18px 0;
+}
+
 /*分页器样式*/
 .m-pagewapper{
     margin-right: 18px;
+}
+
+
+/*课程详情浮层*/
+.m-detail{
+    position: absolute;
+    width: 480px;
+    height: 240px;
+    border:1px solid #c1c0c0;
+    background-color: #fff;
+    box-shadow: 0 0 1px #c1c0c0;
+    overflow: hidden;
+    .card{
+        margin: 10px 10px 20px;
+    }
+    .intro{
+        margin-left: 244px;
+        font: 12px/20px $YAHEI;
+        color: #666;
+        .title{
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .user_icon{
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: url('../../img/icon.png') 0 -24px;
+        }
+        .learn{
+            margin: 7px 0 7px;
+        }
+        
+    }
+    
+    .descript{
+        padding: 20px;
+        background-color: #f8f8f8;
+        font: 14px/24px $YAHEI;
+    }
 }

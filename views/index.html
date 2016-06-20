@@ -104,7 +104,7 @@
     </header> <!-- /header 网站头部 -->
     
     <!-- 网站的主体部分,课程信息自适应剩余宽度 -->
-    <main class="g-bd g-flow">
+    <main class="g-bd g-flow f-cb">
         <!-- 侧栏固定宽度,并且右浮动到最右边 -->
         <aside class="m-aside f-fr">
             <!-- 机构介绍 -->
@@ -118,7 +118,11 @@
             <!-- 最热课程 -->
             <div class="panel">
                 <div class="p_title">最热排行</div>
-                <ul class="hot_list">
+                <div class="m-hotscroll f-oh" id="hotscroll">
+                    <ul class="hot_list f-pr" id="hostlist"></ul>
+                    <!-- <ul class="hot_list " id="hostlist2"></ul> -->
+                </div>
+                <!-- <ul class="hot_list f-oh f-pr" id="hostlist">
                     <li class="list_item f-cb">
                         <a href="#" target="_blank" title="课程" class="f-fl"><img src="../img/icon2.png" alt="" width="50" height="50"></a>
                         <div class="item_info f-oh">
@@ -149,7 +153,7 @@
                             </div>
                         </div>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </aside>
         <!-- 课程展示自适应剩余宽度，使用float使每行显示的课程数目随窗口大小自适应 -->
@@ -159,22 +163,6 @@
                 <div class="tab">编程语言</div>
             </div>
             <article class="m-courses f-cb">
-                <!-- <section class="course">
-                    <div class="course_link">
-                        <div class="img f-oh">
-                            <img class="pic" src="../img/pic1.jpg" alt="混音全揭秘">
-                        </div>
-                        <h3 class="f-elipsis title">混音全揭秘 舞曲实战篇 揭秘音乐揭秘音乐的美丽</h3>
-                    </div>
-                    <div class="course_info">
-                        <p><a href="#">音频帮</a></p>
-                        <div class="like">
-                            <span class="user_icon"></span>
-                            <span class="like_sum">510</span>
-                        </div>
-                        <div class="price">&yen; 800.00</div>
-                    </div>
-                </section>
                 <section class="course">
                     <div class="course_link">
                         <div class="img f-oh">
@@ -239,7 +227,23 @@
                         <div class="price">&yen; 800.00</div>
                     </div>
                 </section>
-                <section class="course"></section> -->
+                <section class="course">
+                    <div class="course_link">
+                        <div class="img f-oh">
+                            <img class="pic" src="../img/pic1.jpg" alt="混音全揭秘">
+                        </div>
+                        <h3 class="f-elipsis title">混音全揭秘 舞曲实战篇 揭秘音乐揭秘音乐的美丽</h3>
+                    </div>
+                    <div class="course_info">
+                        <p><a href="#">音频帮</a></p>
+                        <div class="like">
+                            <span class="user_icon"></span>
+                            <span class="like_sum">510</span>
+                        </div>
+                        <div class="price">&yen; 800.00</div>
+                    </div>
+                </section>
+                <section class="course"></section>
             </article><!-- /article 课程列表结束 -->
             <!-- 分页器 -->
             <div class="m-pagewapper f-fr" id="pwapper"></div>
@@ -249,7 +253,25 @@
 
     <footer class="g-ft">
     </footer>
-    
+    <!-- 课程详情浮层 -->
+    <!-- <div class="m-detail" style="display:none" id="detail">
+        <div class="card f-cb">
+            <a class="f-fl" href="#"><img src="../img/pic1.jpg" alt="" width="224" height="124"></a>
+            <div class="intro f-oh">
+                <h2><a class="title" href="#">手绘系列课程</a></h2>
+                <p class="learn">
+                    <span class="user_icon"></span>
+                    <span class="like_sum">510</span>在学
+                </p>
+                <p class="provider">发布者：<span>sdf</span></p>
+                <p>分类：<span>asdf</span></p>
+            </div>
+        </div>
+        <div class="descript">
+            <p>适用人群：最适合即将实习、求职、就职的大学生，入职一、二三年的新人。别以为那些职场老人都知道！</p>
+        </div>
+    </div> -->
+    <div class="m-detail" style="display:none" id="detail"></div>
 </div>
 <script type="text/javascript" src="../src/js/util.js"></script>
 <script type="text/javascript" src="../src/js/widget/slide/js/slider.js"></script>
@@ -341,6 +363,20 @@
     var pager;
     var htmlstr = "";
     var courseinfo = document.getElementById("courseinfo").getElementsByTagName('article')[0];
+    var detail = document.getElementById("detail");
+    
+    // var courses = courseinfo.getElementsByClassName("course");
+    //                     courses = [].slice.call(courses);
+    //                     courses.forEach(function(course){
+    //                         course.addEventListener("mouseenter", function(event){
+    //                             console.log(event.target.offsetLeft);
+    //                             console.log(event.target.offsetTop);
+    //                             detail.style.left = event.target.offsetLeft + 'px';
+    //                             detail.style.top = event.target.offsetTop + 'px';
+    //                             detail.style.display = "block";
+    //                         });
+    //                     });
+
     util.get(
         'http://study.163.com/webDev/couresByCategory.htm', 
         {pageNo:options.currentPage,psize:options.pageSize,type:10},
@@ -354,7 +390,9 @@
                     {pageNo:pager.currentPage,psize:pager.pageSize,type:10},
                     function(data){
                         var dataObj = JSON.parse(data);
-                        var template='<section class="course">\
+                        var template='<section class="course" data-id="{ $id }" data-middle-photo-url="{ $middlePhotoUrl }"\
+                                          data-name="{ $name }" data-provider="{ $provider }" data-learner-count="{ $learnerCount }"\
+                                          data-category-name="{ $categoryName  }" data-description="{ $description }" >\
                                     <div class="course_link">\
                                         <div class="img f-oh">\
                                             <img class="pic" src="{ $middlePhotoUrl  }" alt=" { $name } ">\
@@ -376,12 +414,124 @@
                             htmlstr += util.renderTemplate(template, list[i]);
                         }
                         courseinfo.innerHTML = htmlstr;
+
+                        var detailTemplate =
+                                '<div class="card f-cb">\
+                                    <a class="f-fl" href="#"><img src="{ $middlePhotoUrl }" alt="" width="224" height="124"></a>\
+                                    <div class="intro f-oh">\
+                                        <h2><a class="title" href="#">{ $name }</a></h2>\
+                                        <p class="learn">\
+                                            <span class="user_icon"></span>\
+                                            <span class="like_sum">{ $learnerCount }</span>在学\
+                                        </p>\
+                                        <p class="provider">发布者：<span>{ $provider }</span></p>\
+                                        <p>分类：<span>{ $categoryName }</span></p>\
+                                    </div>\
+                                </div>\
+                                <div class="descript">\
+                                    <p>{ $description }</p>\
+                                </div>';
+
+
+                        var courses = courseinfo.getElementsByClassName("course");
+                        courses = [].slice.call(courses);
+                        courses.forEach(function(course){
+                            course.addEventListener("mouseenter", function(event){
+                                console.log(event.target.offsetLeft);
+                                console.log(event.target.offsetTop);
+                                detail.innerHTML = util.renderTemplate(detailTemplate, event.target.dataset);
+                                detail.style.left = event.target.offsetLeft + 'px';
+                                detail.style.top = event.target.offsetTop + 'px';
+                                detail.style.display = "block";
+                            });
+                        });
+
                     });
             }
             pager.show(1);
+
     });
 
 
+
+</script>
+
+<!-- 最热列表加载 -->
+<script type="text/javascript">
+    
+    var liTemplate = 
+        '<li class="list_item f-cb">  \
+            <a href="http://study.163.com/course/introduction/{ $id }.htm" target="_blank" title="{ $name }" class="f-fl"><img src="{ $smallPhotoUrl  }" alt="" width="50" height="50"></a> \
+            <div class="item_info f-oh"> \
+                <a href="http://study.163.com/course/introduction/{ $id }.htm" title={ $name }><h3 class="f-elipsis">{ $name }</h3></a> \
+                <div class="like"> \
+                    <span class="user_icon"></span> \
+                    <span class="like_sum">{ $learnerCount  }</span> \
+                </div> \
+            </div> \
+        </li>';
+    var ulstr = "";
+    var hostlist = document.getElementById("hostlist");
+    // var hostlist2 = document.getElementById("hostlist2");
+    var hotscroll = document.getElementById("hotscroll");
+    util.get(
+        'http://study.163.com/webDev/hotcouresByCategory.htm',
+        {},
+        function(data){
+            var dataList = JSON.parse(data);
+            for(var i=0,len=dataList.length; i<len;i++){
+                ulstr += util.renderTemplate(liTemplate, dataList[i]);
+            }
+            ulstr += ulstr;
+            hostlist.innerHTML = ulstr;
+
+            function animate (offset) {
+                if (offset == 0) {
+                    return;
+                }
+                hostlist.style.top = hostlist.style.top || 0;
+                var time = 300;
+                var inteval = 10;
+                var speed = offset/(time/inteval);
+                var top = parseInt(hostlist.style.top) + offset;
+                
+                var go = function (){
+                    if ( (speed > 0 && parseInt(hosthost.style.top) < top) || (speed < 0 && parseInt(hostlist.style.top) > top)) {
+                        hostlist.style.top = parseInt(hostlist.style.top) + speed + 'px';
+                        setTimeout(go, inteval);
+                    }
+                    else {
+                        hostlist.style.top = top + 'px';
+                        if(top<-1387){
+                            hostlist.style.top = 0 + 'px';
+                        }
+                        // if(top<(-600 * len)) {
+                        //     hostlist.style.top = '-600px';
+                        // }
+                        // animated = false;
+                    }
+                }
+                go();
+            }
+            setInterval(function(){animate(-73)}, 5000);
+             // var speed=65
+             //  hosthostlist2.innerHTML=hostlist.innerHTML
+             //    function Marquee2(){
+             //      if(hostlist2.offsetTop-hotscroll.scrollTop<=0)
+             //         hotscroll.scrollTop-=hostlist.offsetHeight;
+             //           else{
+             //            hotscroll.scrollTop++;
+             //               }
+             //                  }
+             //                     var MyMar2=setInterval(Marquee2,speed)
+             //                        hotscroll.onmouseover=function() {clearInterval(MyMar2)}
+             //                           hotscroll.onmouseout=function() {MyMar2=setInterval(Marquee2,speed)}
+
+
+        });
+
+    
+    
 
 </script>
 </body>
