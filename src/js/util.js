@@ -160,10 +160,8 @@ var util = (function(){
             return cookie;
         },
 
-        removeCookie(name, path, domain){
+        removeCookie: function(name){
             document.cookie = name + '='
-            + '; path='+path
-            + '; domain='+domain
             + '; max-age=0';
         }
         

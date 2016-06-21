@@ -20,12 +20,12 @@
     <!-- 头部 -->
     <header class="g-hd">
         <!-- 网站提示信息 -->
-        <div class="m-tips">
+        <div class="m-tips" id="tips" style="display: none">
             <div class="g-flow f-cb">
                 <p class="f-fl">网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！
                     <a href="http://study.163.com/" class="u-more" target="_blank" title="网易云课堂">立即查看&gt;</a>
                 </p>
-                <p class="f-fr"><a class="u-close">&times;</a> 不再提醒</p>
+                <p class="f-fr" id="noMention"><a class="u-close" >&times;</a> 不再提醒</p>
             </div>
         </div>
 
@@ -124,7 +124,6 @@
                 <div class="p_title">最热排行</div>
                 <div class="m-hotscroll f-oh" id="hotscroll">
                     <ul class="hot_list f-pr" id="hostlist"></ul>
-                    <!-- <ul class="hot_list " id="hostlist2"></ul> -->
                 </div>
                 <!-- <ul class="hot_list f-oh f-pr" id="hostlist">
                     <li class="list_item f-cb">
@@ -256,6 +255,32 @@
     </main><!-- /main网站主体结束 -->
 
     <footer class="g-ft">
+        <div class="g-flow">
+            <ul>
+                <li class="info">
+                    <p class="logo"></p>
+                    <p class="beizhu">&copy;2014 icourse163.org 浙ICP备08114786号-1</p>
+                    <p class="beizhu">icourse.cn 京ICP备12020869号-2 京公网安备110102000459-2</p>
+                </li>
+                <li class="link">
+                    <p>友情链接：</p>
+                    <p><a href="http://open.163.com/">网易公开课</a></p>
+                    <p><a href="http://study.163.com/">网易云课堂</a></p>
+                    <p><a href="http://www.icourse163.org/">中国大学MOOC</a></p>
+                </li>
+                <li class="we">
+                    <p><a href="">我们：</a></p>
+                    <p><a href="javascript:;">关于</a></p>
+                    <p><a href="javascript:;">联系</a></p>
+                    <p><a href="javascript:;">关注<span class="weibo"></span></a></p>
+                </li>
+                <li class="more">
+                    <p>更多：</p>
+                    <p><a href="javascript:;">常见问题</a></p>
+                    <p><a href="javascript:;">意见反馈</a></p>
+                </li>
+            </ul>
+        </div>
     </footer>
     <!-- 课程详情浮层 -->
     <!-- <div class="m-detail" style="display:none" id="detail">
@@ -293,21 +318,55 @@
 <script type="text/javascript" src="../src/js/widget/modal/animate.js"></script>
 <script type="text/javascript" src="../src/js/widget/modal/modal.js"></script>
 <script type="text/javascript" src="../src/js/md5.min.js"></script>
+
 <script type="text/javascript">
 
+    //用来初始化提示条和关注按钮
+    (function initHeader(){
+        var watch = document.getElementById("watch"),
+            unwatch = document.getElementById("unwatch"),
+            tips = document.getElementById("tips");
+            cookies = util.getCookie();
+        if(cookies["noMention"] == undefined){
+            tips.style.display = "block";
+        }
+
+        if(cookies["followSuc"] !== undefined){
+            watch.style.display = "none";
+            unwatch.style.display = "inline-block";
+        }
+    })();
+    //设置不再提醒按钮事件
+    var noMention = document.getElementById("noMention"),
+        tips = document.getElementById("tips");
+    noMention.onclick = function(){
+        tips.style.display = "none";
+        util.setCookie('noMention', 'true'); //本次会话有效的cookie
+    }
+    
+    //登陆表单验证
     var loginBox = document.forms.loginForm;
     var uname = loginBox.uname;
     var upwd = loginBox.upwd;
     var login = loginBox.login;
-    var wraper = document.getElementById("mlogin");
+    var loginWraper = document.getElementById("mlogin");
     login.onclick = function(){
         var name = md5(uname.value.trim());
         var pwd = md5(upwd.value.trim());
         util.get(
                 "http://study.163.com/webDev/login.htm",
                 {userName: name, password:pwd},
-                function(){
+                function(data){
+                    if(!data){
+                        alert("登陆失败！");
+                        return;
+                    }
+                    var date = new Date();
+                    date = +date + 7*24*60*60*1000;
+                    date = new Date(date);
+                    util.setCookie("loginSuc", 'true', date);
                     alert("登陆成功！");
+                    modal.hide();
                 }
             );
     }
@@ -321,12 +380,33 @@
     });
 
     var watchBtn = document.getElementById("watch");
+    var unwatchBtn = document.getElementById("unwatch");
     watchBtn.addEventListener('click', function(event){
-        var isLogin = util.getCookie()['isLogin'];
-        if(!isLogin){
-            modal.show(wraper);
+        var isLogin = util.getCookie()['loginSuc'];
+        if(isLogin === undefined){
+            modal.show(loginWraper);//没有登陆就显示登陆弹窗
+        }else{
+            util.get('http://study.163.com/webDev/attention.htm', {},
+                    function(data){
+                        if(!data){
+                            alert("关注失败！");
+                            return;
+                        }
+                        watchBtn.style.display = "none";
+                        unwatchBtn.style.display = "inline-block";
+                        var date = new Date();
+                        date = +date + 7*24*60*60*1000;
+                        date = new Date(date);
+                        util.setCookie("followSuc", 'true', date);
+                    });
         }
     });
+
+    unwatchBtn.onclick = function(){
+        watchBtn.style.display = "inline-block";
+        unwatchBtn.style.display = "none";
+        util.removeCookie("followSuc");
+    }
 
     function checkLogin(){
         var isLogin = util.getCookie()['isLogin'];
@@ -341,9 +421,9 @@
     }
 
     checkLogin();
-
+    //显示视频弹窗
     function showVideo(obj){
-        var htmlstr = '<video src="'+ obj.dataset.link+'" width="890" height="500" controls="" autoplay></video>';
+        var htmlstr = '<p style="margin-bottom:10px; color:black">观看下面的视频了解吧：</p><video src="'+ obj.dataset.link+'" width="890" height="500" controls="" autoplay></video>';
         modal.show(htmlstr);
     }
     
@@ -441,10 +521,10 @@
                             <div class="img f-oh">\
                             <img class="pic" src="{ $middlePhotoUrl  }" alt=" { $name } ">\
                             </div>\
-                            <h3 class="f-elipsis title">{ $name }</h3>\
+                            <h3><a href="http://study.163.com/course/introduction/{ $id }.htm" class="f-elipsis title" target="_blank">{ $name }</a></h3>\
                         </div>\
                         <div class="course_info">\
-                            <p><a href="#">{ $provider }</a></p>\
+                            <p><a>{ $provider }</a></p>\
                             <div class="like">\
                                 <span class="user_icon"></span>\
                                 <span class="like_sum">{ $learnerCount } </span>\
@@ -509,19 +589,13 @@
                         detail.style.left = target.offsetLeft + 'px';
                         detail.style.top =  target.offsetTop + 'px';
                         detail.style.display = "block";
-                    }, 500);
+                    }, 300);
                 }
                 courses.forEach(function(course){
                     //为课程卡片添加 mouseenter事件，显示卡片详情
                     course.addEventListener("mouseenter", function(event){
                         //延迟显示浮层
-                        clearTimeout(delayTimer);
-                        delayTimer = setTimeout(function(){
-                            detail.innerHTML = util.renderTemplate(detailTemplate, event.target.dataset);
-                            detail.style.left = event.target.offsetLeft + 'px';
-                            detail.style.top =  event.target.offsetTop + 'px';
-                            detail.style.display = "block";
-                        }, 500);
+                       delayTrigger(event.currentTarget);
                         
                     });
                     course.addEventListener("mousemove", function(event){
@@ -566,7 +640,7 @@
         });
     }
 
-    // chagePaginator(10, pager, );
+    // chagePaginator(10, pager,courseinfo, detail, template, detailTemplate);
     var tabs = document.getElementById("tabs");
     var tabList = [].slice.call(tabs.getElementsByClassName("tab"));
     function clearTabClass(tabList){
@@ -577,18 +651,18 @@
             clearTabClass(tabList);
             util.addClass(tab, "z-selected");
             var type = parseInt(tab.dataset.type);
-            chagePaginator(type, courseinfo, detail, template, detailTemplate);
+            chagePaginator(type, pager, courseinfo, detail, template, detailTemplate);
         });
     });
 
     tabList[0].click();
 
     
-</script>
+</script><!-- /page 分页器以及tab事件初始化完成 -->
 
 <!-- 最热列表加载 -->
 <script type="text/javascript">
-    
+    //hostlist模板
     var liTemplate = 
         '<li class="list_item f-cb">  \
             <a href="http://study.163.com/course/introduction/{ $id }.htm" target="_blank" title="{ $name }" class="f-fl"><img src="{ $smallPhotoUrl  }" alt="" width="50" height="50"></a> \
@@ -596,14 +670,16 @@
                 <a href="http://study.163.com/course/introduction/{ $id }.htm" title={ $name }><h3 class="f-elipsis">{ $name }</h3></a> \
                 <div class="like"> \
                     <span class="user_icon"></span> \
-                    <span class="like_sum">{ $learnerCount  }</span> \
+                    <span class="like_sum">{ $learnerCount }</span> \
                 </div> \
             </div> \
         </li>';
+
     var ulstr = "";
-    var hostlist = document.getElementById("hostlist");
-    // var hostlist2 = document.getElementById("hostlist2");
-    var hotscroll = document.getElementById("hotscroll");
+    var hotscroll = document.getElementById("hotscroll");//hotlist外层包裹容器
+    var hostlist = document.getElementById("hostlist"); //
+    var hostTimer = null;
+    
     util.get(
         'http://study.163.com/webDev/hotcouresByCategory.htm',
         {},
@@ -624,13 +700,14 @@
                 var inteval = 10;
                 var speed = offset/(time/inteval);
                 var top = parseInt(hostlist.style.top) + offset;
-                
+                // var timer = null;
                 var go = function (){
                     if ( (speed > 0 && parseInt(hosthost.style.top) < top) || (speed < 0 && parseInt(hostlist.style.top) > top)) {
                         hostlist.style.top = parseInt(hostlist.style.top) + speed + 'px';
-                        setTimeout(go, inteval);
+                        hostTimer = setTimeout(go, inteval);
                     }
                     else {
+                        clearTimeout(hostTimer);
                         hostlist.style.top = top + 'px';
                         if(top<-1387){
                             hostlist.style.top = 0 + 'px';
@@ -643,20 +720,7 @@
                 }
                 go();
             }
-            // setInterval(function(){animate(-73)}, 5000);
-             // var speed=65
-             //  hosthostlist2.innerHTML=hostlist.innerHTML
-             //    function Marquee2(){
-             //      if(hostlist2.offsetTop-hotscroll.scrollTop<=0)
-             //         hotscroll.scrollTop-=hostlist.offsetHeight;
-             //           else{
-             //            hotscroll.scrollTop++;
-             //               }
-             //                  }
-             //                     var MyMar2=setInterval(Marquee2,speed)
-             //                        hotscroll.onmouseover=function() {clearInterval(MyMar2)}
-             //                           hotscroll.onmouseout=function() {MyMar2=setInterval(Marquee2,speed)}
-
+            setInterval(function(){animate(-73)}, 5000);
 
         });
 

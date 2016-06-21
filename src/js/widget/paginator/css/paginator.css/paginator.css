@@ -10,12 +10,12 @@
   height: 20px;
   line-height: 20px;
 }
-.m-pager .u-page:hover {
-  color: #39a030;
-}
-.m-pager .z-active, .m-pager .pbn {
+.m-pager .u-page:hover, .m-pager .pbn {
   background-color: #9dd8b1;
   color: #fff;
+}
+.m-pager .z-active {
+  color: #39a030;
 }
 .m-pager .pbn {
   display: inline-block;

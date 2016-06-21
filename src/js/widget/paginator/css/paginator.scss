@@ -9,12 +9,12 @@
         height: 20px;
         line-height:20px;
     }
-    .u-page:hover{
-        color: #39a030;
-    }
-    .z-active, .pbn{
+    .u-page:hover, .pbn{
         background-color: #9dd8b1;
         color: #fff;
+    }
+    .z-active{
+        color: #39a030;
     }
     .pbn{
         display: inline-block;

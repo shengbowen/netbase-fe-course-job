@@ -20,6 +20,15 @@
             border-top: none;
             box-shadow: 0 1px $BORDER_COLOR;
             background-color: #fff;
+            &:hover{
+                box-shadow: 0 0 2px grey;
+                .course_link{
+                    .title{
+                        color: $GREEN;
+                    }
+                    
+                }
+            }
         }
     }
 
@@ -62,7 +71,8 @@
         }
     }
     .title{
-        font-weight: bold;
+        display: block;
+        font-weight: normal;
         color: #333;
         margin: 6px 10px 8px 6px;
     }
@@ -104,6 +114,9 @@
         border-top: none;
         box-shadow: 0 1px #ccc;
         background-color: #fff;
+        &:hover{
+            box-shadow: 0 0 2px grey;
+        }
         .p_title{
             height: 54px;
             padding: 0 18px;
@@ -117,7 +130,7 @@
                 display: block;
                 height:110px;
                 width:180px;
-                background: url('../../img/pic1.jpg');
+                background: url('../../img/video.jpg');
             }
         }
         .hot_list{
@@ -157,7 +170,7 @@
 
 /*分页器样式*/
 .m-pagewapper{
-    margin-right: 18px;
+    margin-right: 25px;
 }
 
 

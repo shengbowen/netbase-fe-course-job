@@ -73,6 +73,7 @@ body, html {
 
 .g-hd {
   background-color: #fff;
+  border-bottom: 1px solid transparent;
 }
 
 .m-tips {
@@ -291,6 +292,12 @@ body, html {
   box-shadow: 0 1px #f1f1f1;
   background-color: #fff;
 }
+.m-banner .m-courses .course:hover {
+  box-shadow: 0 0 2px grey;
+}
+.m-banner .m-courses .course:hover .course_link .title {
+  color: #39a030;
+}
 .m-banner .u-tabs {
   margin-bottom: 29px;
   font-size: 0;
@@ -330,7 +337,8 @@ body, html {
   transform: scale(1.2);
 }
 .m-courses .title {
-  font-weight: bold;
+  display: block;
+  font-weight: normal;
   color: #333;
   margin: 6px 10px 8px 6px;
 }
@@ -371,6 +379,9 @@ body, html {
   box-shadow: 0 1px #ccc;
   background-color: #fff;
 }
+.m-aside .panel:hover {
+  box-shadow: 0 0 2px grey;
+}
 .m-aside .panel .p_title {
   height: 54px;
   padding: 0 18px;
@@ -385,7 +396,7 @@ body, html {
   display: block;
   height: 110px;
   width: 180px;
-  background: url("../../img/pic1.jpg");
+  background: url("../../img/video.jpg");
 }
 .m-aside .panel .hot_list {
   height: 730px;
@@ -421,7 +432,7 @@ body, html {
 
 /*分页器样式*/
 .m-pagewapper {
-  margin-right: 18px;
+  margin-right: 25px;
 }
 
 /*课程详情浮层*/
@@ -491,4 +502,57 @@ body, html {
   color: #fff;
   background: url("../../img/button.png");
   border: none;
+}
+
+.g-ft {
+  margin-top: 118px;
+  height: 262px;
+  background-color: #2c3339;
+  color: #a2a4a5;
+}
+.g-ft li {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 80px;
+}
+.g-ft .info {
+  margin-left: 48px;
+}
+.g-ft .info .logo {
+  margin-top: 5px;
+  margin-bottom: 32px;
+  background: url("../../img/logo2.png") no-repeat 0 -12px;
+  width: 250px;
+  height: 28px;
+}
+.g-ft .info .beizhu {
+  font: 12.5px/25px "microsoft yahei";
+}
+.g-ft .link p, .g-ft .we p, .g-ft .more p {
+  font: 12.5px/29.17px "microsoft yahei";
+}
+.g-ft .link p a, .g-ft .we p a, .g-ft .more p a {
+  vertical-align: top;
+  font-size: 14.58px;
+  color: #a2a4a5;
+}
+.g-ft .link p a:hover, .g-ft .we p a:hover, .g-ft .more p a:hover {
+  text-decoration: underline;
+}
+.g-ft .link {
+  margin-left: 138px;
+}
+.g-ft .we {
+  margin-left: 85px;
+}
+.g-ft .we .weibo {
+  margin-top: 5px;
+  margin-left: 5px;
+  display: inline-block;
+  width: 25px;
+  height: 20px;
+  background: url("../../img/icon.png") no-repeat 0 -40px;
+}
+.g-ft .more {
+  margin-left: 66px;
 }
