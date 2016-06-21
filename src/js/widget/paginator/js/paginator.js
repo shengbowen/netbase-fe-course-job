@@ -22,7 +22,7 @@
     //                 <span class="pright pshow">...</span> \
     //                 <a href="" class="u-page page8"></a> \
     //                 <a href="" class="pbn next"></a></div> ' ;
-    var template = '<div class="m-pager">\
+    var template = '<div class="m-pager" style="display: none">\
                         <a href="#courseinfo" class="pbn prev">&lt</a>\
                         <a href="#courseinfo" class="u-page page1"></a> \
                         <span class="pleft">...</span> \
@@ -77,6 +77,7 @@
 
         //直接显示指定的页
         show: function(pageIndex){
+            this.pager.style.display = "inline-block";
             pageIndex = pageIndex < 1 ? 1 : pageIndex;
             pageIndex = pageIndex > this.totalPages ? this.totalPages : pageIndex; 
             this.currentPage = pageIndex;
@@ -111,7 +112,7 @@
                 this.pages[i].innerHTML = parray[i];
                 _.delClass(this.pages[i], 'z-active');
                 if(parray[i] === this.currentPage){
-                    _.addClass(this.pages[i], 'z-active'); //当前页面添加选中装填
+                    _.addClass(this.pages[i], 'z-active'); //当前页面添加选中状态
                 }
             }
             //当总页数小于8时隐藏页码节点

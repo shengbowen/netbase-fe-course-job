@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="../dist/css/reset.css">
 <link rel="stylesheet" href="../src/js/widget/slide/style.css">
 <link rel="stylesheet" href="../src/js/widget/paginator/css/paginator.css/paginator.css">
+<link rel="stylesheet" href="../src/js/widget/modal/animate.css">
+<link rel="stylesheet" href="../src/js/widget/modal/modal.css">
 <link rel="stylesheet" href="../dist/css/style.css"/>
 <link rel="shortcut icon" href="img/favicon.ico"/>
 <link rel="apple-touch-icon" href="img/touchicon.png"/>
@@ -21,7 +23,7 @@
         <div class="m-tips">
             <div class="g-flow f-cb">
                 <p class="f-fl">网易云课堂微专业，帮助你掌握专业技能，令你求职或加薪多一份独特优势！
-                    <a href="#" class="u-more">立即查看&gt;</a>
+                    <a href="http://study.163.com/" class="u-more" target="_blank" title="网易云课堂">立即查看&gt;</a>
                 </p>
                 <p class="f-fr"><a class="u-close">&times;</a> 不再提醒</p>
             </div>
@@ -31,9 +33,11 @@
             <div class="m-logo f-fl">
                 <a href="#" class="f-fl"><img class="img" src="../img/logo1.png" alt="logo" title="网易教育产品部" width="236" height="90" /></a>
                 <div class="m-watch">
-                    <button class="u-watch"><span class="u-add">+</span> 关注</button>
+                    <button class="u-watch" id="watch"><span class="u-add">+</span> 关注</button>
+                    <div class="u-unwatch" id="unwatch" style="display: none">
+                        <span class="radic"></span><span class="watched">已关注 </span><span class="cancel">&nbsp;|&nbsp; <a id="unwatch">取消</a></span>
+                    </div>
                     粉丝<span id="fans" class="fans">45</span>
-                    <div class="m-unwatch" class="display:none"></div>
                 </div>
             </div>
 
@@ -112,7 +116,7 @@
                 <div class="p_title">机构介绍</div>
                 <div class="p_video">
                     <p>观看下面的视频了解吧：</p>
-                    <video src="" height="110px"></video>
+                    <a href="javascript:;" class="vbtn" data-link="http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4" onclick="showVideo(this)"></a>
                 </div>
             </div>
             <!-- 最热课程 -->
@@ -158,9 +162,9 @@
         </aside>
         <!-- 课程展示自适应剩余宽度，使用float使每行显示的课程数目随窗口大小自适应 -->
         <div class="m-banner f-oh f-cb" id="courseinfo">
-            <div class="u-tabs">
-                <div class="tab z-selected">产品设计</div>
-                <div class="tab">编程语言</div>
+            <div class="u-tabs" id="tabs">
+                <div class="tab z-selected" data-type="10">产品设计</div>
+                <div class="tab" data-type="20">编程语言</div>
             </div>
             <article class="m-courses f-cb">
                 <section class="course">
@@ -272,11 +276,83 @@
         </div>
     </div> -->
     <div class="m-detail" style="display:none" id="detail"></div>
+    <div class="wraper" style="display: none" id="wraper">
+        <div class="m-login" id="mlogin">
+            <form action="#" name="loginForm">
+                <h3 class="title">登陆网易云课堂</h3>
+                <input type="text" class="uname" name="uname" placeholder="账号">
+                <input type="password" class="upwd" name="upwd" placeholder="密码">
+                <button class="submit" type="submit" name="login">登陆</button>
+            </form>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="../src/js/util.js"></script>
 <script type="text/javascript" src="../src/js/widget/slide/js/slider.js"></script>
 <script type="text/javascript" src="../src/js/widget/paginator/js/paginator.js"></script>
+<script type="text/javascript" src="../src/js/widget/modal/animate.js"></script>
+<script type="text/javascript" src="../src/js/widget/modal/modal.js"></script>
+<script type="text/javascript" src="../src/js/md5.min.js"></script>
+<script type="text/javascript">
+
+    var loginBox = document.forms.loginForm;
+    var uname = loginBox.uname;
+    var upwd = loginBox.upwd;
+    var login = loginBox.login;
+    var wraper = document.getElementById("mlogin");
+    login.onclick = function(){
+        var name = md5(uname.value.trim());
+        var pwd = md5(upwd.value.trim());
+        util.get(
+                "http://study.163.com/webDev/login.htm",
+                {userName: name, password:pwd},
+                function(){
+                    alert("登陆成功！");
+                }
+            );
+    }
+
+    var modal = new Modal({
+        // 2. 动画设置
+        animation: {
+          enter: 'bounceIn',
+          leave: 'bounceOut'
+        }
+    });
+
+    var watchBtn = document.getElementById("watch");
+    watchBtn.addEventListener('click', function(event){
+        var isLogin = util.getCookie()['isLogin'];
+        if(!isLogin){
+            modal.show(wraper);
+        }
+    });
+
+    function checkLogin(){
+        var isLogin = util.getCookie()['isLogin'];
+        var watch = document.getElementById("watch");
+        var unwatch =document.getElementById("unwatch");
+        if(!isLogin){
+            return false;
+        }else{
+            watch.style.display = "none";
+            unwatch.style.display = "inline-block";
+        }
+    }
+
+    checkLogin();
+
+    function showVideo(obj){
+        var htmlstr = '<video src="'+ obj.dataset.link+'" width="890" height="500" controls="" autoplay></video>';
+        modal.show(htmlstr);
+    }
+    
+
+</script>
+
+<!-- 头部图片轮播的初始化和事件绑定 -->
 <script>
+    //调用轮播组件构造函数
     var slider = new Slider({
       //视口容器
       container: document.getElementById('gslide'),
@@ -304,14 +380,14 @@
         return [].slice.call(document.querySelectorAll(selector));
     }
 
-    var cursors = $('.cursor');
-    var container = $('.g-slide')[0];
-    var larrow = $('.u-larrow')[0];
-    var rarrow = $('.u-rarrow')[0];
+    var cursors = $('.cursor'); //轮播指示器
+    var container = $('.g-slide')[0];//视口容器
+    var larrow = $('.u-larrow')[0];//左箭头
+    var rarrow = $('.u-rarrow')[0];//右滚动箭头
 
     cursors.forEach(function(cursor, index){
       cursor.addEventListener('click', function(){
-        if(cursor.className.indexOf('z-active')===-1){
+        if(cursor.className.indexOf('z-active') === -1){
             slider.nav(index);
         }
       })
@@ -334,6 +410,7 @@
         slider.next();
     });
 
+    //更新指示器样式的处理函数
     slider.on('nav', function(ev){
         cursors.forEach(function(cursor, index){
             if(ev.pageIndex === index){
@@ -345,115 +422,168 @@
     });
     slider.nav(0);
     slider.autoPlay();
+</script><!-- /slide 轮播初始化 -->
 
-    //获取课程信息
-    // var pager = new Paginator({
-    //     currentPage: 1,
-    //     totalPages: 10,
-    //     container: document.getElementById("pwapper")
-    // });
-    // pager.show(1);
 
-    var options = {
-        container: document.getElementById("pwapper"),
-        pageSize: 20,
+<!-- 分页器初始化，及事件处理函数 -->
+<script type="text/javascript">
+    //新建分页器对象
+    var pager = new Paginator({
+        container: document.getElementById("pwapper"), //分页器容器
+        pageSize: 20, 
         currentPage: 1
-    };
+    });
+    //课程信息的模板字符串，用来根据数据渲染最终得 innerHTML
+    var template='<section class="course" data-id="{ $id }" data-middle-photo-url="{ $middlePhotoUrl }"\
+                            data-name="{ $name }" data-provider="{ $provider }" data-learner-count="{ $learnerCount }"\
+                            data-category-name="{ $categoryName  }" data-description="{ $description }" >\
+                        <div class="course_link">\
+                            <div class="img f-oh">\
+                            <img class="pic" src="{ $middlePhotoUrl  }" alt=" { $name } ">\
+                            </div>\
+                            <h3 class="f-elipsis title">{ $name }</h3>\
+                        </div>\
+                        <div class="course_info">\
+                            <p><a href="#">{ $provider }</a></p>\
+                            <div class="like">\
+                                <span class="user_icon"></span>\
+                                <span class="like_sum">{ $learnerCount } </span>\
+                            </div>\
+                            <div class="price">&yen; { $price }</div>\
+                        </div>\
+                  </section>';
+    //课程详情的模板字符串
+    var detailTemplate =
+            '<div class="card f-cb">\
+                <a class="f-fl" href="#"><img src="{ $middlePhotoUrl }" alt="" width="224" height="124"></a>\
+                <div class="intro f-oh">\
+                    <h2><a class="title" href="#">{ $name }</a></h2>\
+                    <p class="learn">\
+                        <span class="user_icon"></span>\
+                        <span class="like_sum">{ $learnerCount }</span>在学\
+                    </p>\
+                    <p class="provider">发布者：<span>{ $provider }</span></p>\
+                    <p>分类：<span>{ $categoryName }</span></p>\
+                </div>\
+            </div>\
+            <div class="descript">\
+                <p>{ $description }</p>\
+            </div>';
 
-    var pager;
     var htmlstr = "";
     var courseinfo = document.getElementById("courseinfo").getElementsByTagName('article')[0];
     var detail = document.getElementById("detail");
+    var delayTimer = null //设置一个延迟定时器，当hover到卡片一定时间才显示浮层
     
-    // var courses = courseinfo.getElementsByClassName("course");
-    //                     courses = [].slice.call(courses);
-    //                     courses.forEach(function(course){
-    //                         course.addEventListener("mouseenter", function(event){
-    //                             console.log(event.target.offsetLeft);
-    //                             console.log(event.target.offsetTop);
-    //                             detail.style.left = event.target.offsetLeft + 'px';
-    //                             detail.style.top = event.target.offsetTop + 'px';
-    //                             detail.style.display = "block";
-    //                         });
-    //                     });
+    /**
+     * [pageClickHandler 点击页码的事件处理函数，渲染课程列表，并为课程卡片添加mouse事件]
+     * @param  {[number]} type          [课程类型]
+     * @param {pagintor 对象}  pager [description]
+     * @param  {[Dom node]} listContainer [课程列表的父容器]
+     * @param  {[Dom node]} detail        [课程详情浮层节点]
+     * @param {模板字符串} [template] [渲染列表的模板]
+     * @param {模板字符串} [detailTemplate] [渲染详情浮层的模板]
+     * @return {[type]}               [description]
+     */
+    var pageClickHandler = function(type, pager, listContainer, detail, template, detailTemplate){
+        util.get(
+            'http://study.163.com/webDev/couresByCategory.htm', 
+            {pageNo:pager.currentPage,psize:pager.pageSize,type: type},
+            function(data){                
+                var list = JSON.parse(data).list; //课程列表数据
+                //渲染课程列表
+                var htmlstr = "";
+                for(var i=0,len=list.length; i<len; i++){
+                    htmlstr += util.renderTemplate(template, list[i]);
+                }
+                listContainer.innerHTML = htmlstr;
 
-    util.get(
-        'http://study.163.com/webDev/couresByCategory.htm', 
-        {pageNo:options.currentPage,psize:options.pageSize,type:10},
-        function(data){
-            var obj = JSON.parse(data);
-            options.totalPages = obj.totalPage;
-            pager = new Paginator(options);
-            pager.onPageClicked = function(){
-                util.get(
-                    'http://study.163.com/webDev/couresByCategory.htm', 
-                    {pageNo:pager.currentPage,psize:pager.pageSize,type:10},
-                    function(data){
-                        var dataObj = JSON.parse(data);
-                        var template='<section class="course" data-id="{ $id }" data-middle-photo-url="{ $middlePhotoUrl }"\
-                                          data-name="{ $name }" data-provider="{ $provider }" data-learner-count="{ $learnerCount }"\
-                                          data-category-name="{ $categoryName  }" data-description="{ $description }" >\
-                                    <div class="course_link">\
-                                        <div class="img f-oh">\
-                                            <img class="pic" src="{ $middlePhotoUrl  }" alt=" { $name } ">\
-                                        </div>\
-                                        <h3 class="f-elipsis title">{ $name }</h3>\
-                                    </div>\
-                                    <div class="course_info">\
-                                        <p><a href="#">{ $provider }</a></p>\
-                                        <div class="like">\
-                                            <span class="user_icon"></span>\
-                                            <span class="like_sum">{ $learnerCount } </span>\
-                                        </div>\
-                                        <div class="price">&yen; { $price }</div>\
-                                    </div>\
-                                </section>';
-                        var list = dataObj.list;
-                        htmlstr = "";
-                        for(var i=0,len=list.length; i<len; i++){
-                            htmlstr += util.renderTemplate(template, list[i]);
-                        }
-                        courseinfo.innerHTML = htmlstr;
-
-                        var detailTemplate =
-                                '<div class="card f-cb">\
-                                    <a class="f-fl" href="#"><img src="{ $middlePhotoUrl }" alt="" width="224" height="124"></a>\
-                                    <div class="intro f-oh">\
-                                        <h2><a class="title" href="#">{ $name }</a></h2>\
-                                        <p class="learn">\
-                                            <span class="user_icon"></span>\
-                                            <span class="like_sum">{ $learnerCount }</span>在学\
-                                        </p>\
-                                        <p class="provider">发布者：<span>{ $provider }</span></p>\
-                                        <p>分类：<span>{ $categoryName }</span></p>\
-                                    </div>\
-                                </div>\
-                                <div class="descript">\
-                                    <p>{ $description }</p>\
-                                </div>';
-
-
-                        var courses = courseinfo.getElementsByClassName("course");
-                        courses = [].slice.call(courses);
-                        courses.forEach(function(course){
-                            course.addEventListener("mouseenter", function(event){
-                                console.log(event.target.offsetLeft);
-                                console.log(event.target.offsetTop);
-                                detail.innerHTML = util.renderTemplate(detailTemplate, event.target.dataset);
-                                detail.style.left = event.target.offsetLeft + 'px';
-                                detail.style.top = event.target.offsetTop + 'px';
-                                detail.style.display = "block";
-                            });
-                        });
-
+                //为课程列表绑定事件
+                var courses = listContainer.getElementsByClassName("course");
+                courses = [].slice.call(courses);
+                //模拟悬停效果
+                var delayTrigger = function(target){
+                    clearTimeout(delayTimer);
+                    delayTimer = setTimeout(function(){
+                        detail.innerHTML = util.renderTemplate(detailTemplate, target.dataset);
+                        detail.style.left = target.offsetLeft + 'px';
+                        detail.style.top =  target.offsetTop + 'px';
+                        detail.style.display = "block";
+                    }, 500);
+                }
+                courses.forEach(function(course){
+                    //为课程卡片添加 mouseenter事件，显示卡片详情
+                    course.addEventListener("mouseenter", function(event){
+                        //延迟显示浮层
+                        clearTimeout(delayTimer);
+                        delayTimer = setTimeout(function(){
+                            detail.innerHTML = util.renderTemplate(detailTemplate, event.target.dataset);
+                            detail.style.left = event.target.offsetLeft + 'px';
+                            detail.style.top =  event.target.offsetTop + 'px';
+                            detail.style.display = "block";
+                        }, 500);
+                        
                     });
-            }
-            pager.show(1);
+                    course.addEventListener("mousemove", function(event){
+                        //延迟显示浮层
+                        delayTrigger(event.currentTarget);
+                    });
+                    course.addEventListener('mouseleave', function(){
+                        clearTimeout(delayTimer);
+                    });
+                    //为浮层添加mouseleave
+                    detail.addEventListener('mouseleave', function(event){
+                        detail.style.display = "none";
+                    });
+                });
 
+            });
+    }
+
+
+    /**
+     * [chagePaginator 不同的tabx项 重新获取数据，并渲染分页器]
+     * @param  {[number]} type  [课程类型]
+     * @param  {[paginator]} pager [分页器对象]
+     * @return {[type]}       [description]
+     */
+    var chagePaginator = function(type, pager, listContainer, detail, template, detailTemplate){
+        //获取总的页码数
+        util.get(
+            'http://study.163.com/webDev/couresByCategory.htm', 
+            {pageNo: 1,psize: pager.pageSize, type:type}, 
+            function(data){
+                var obj = JSON.parse(data);
+                //给分页器设置总的页码数
+                pager.totalPages = obj.totalPage;
+                //页码按钮点击处理函数
+                pager.onPageClicked = function(){
+                    pageClickHandler(type, pager, listContainer, detail, template, detailTemplate);
+                }
+
+                pager.show(1);
+
+        });
+    }
+
+    // chagePaginator(10, pager, );
+    var tabs = document.getElementById("tabs");
+    var tabList = [].slice.call(tabs.getElementsByClassName("tab"));
+    function clearTabClass(tabList){
+        tabList.forEach(function(tab){util.delClass(tab, 'z-selected')});
+    }
+    tabList.forEach(function(tab){
+        tab.addEventListener("click", function(event){
+            clearTabClass(tabList);
+            util.addClass(tab, "z-selected");
+            var type = parseInt(tab.dataset.type);
+            chagePaginator(type, courseinfo, detail, template, detailTemplate);
+        });
     });
 
+    tabList[0].click();
 
-
+    
 </script>
 
 <!-- 最热列表加载 -->
@@ -513,7 +643,7 @@
                 }
                 go();
             }
-            setInterval(function(){animate(-73)}, 5000);
+            // setInterval(function(){animate(-73)}, 5000);
              // var speed=65
              //  hosthostlist2.innerHTML=hostlist.innerHTML
              //    function Marquee2(){

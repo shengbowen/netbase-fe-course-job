@@ -104,21 +104,52 @@ body, html {
 .m-top .m-watch .fans {
   margin-left: 7px;
 }
-.m-top .u-watch {
+.m-top .m-watch .u-watch {
   display: inline-block;
   width: 54px;
   height: 21px;
   border-radius: 2px;
   border: none;
   margin: 0 14px 0 30px;
-  vertical-align: middle;
   background-color: #21a557;
   color: #fff;
 }
-.m-top .u-watch .u-add {
+.m-top .m-watch .u-watch .u-add {
   font-weight: bold;
   font-size: 14px;
   vertical-align: -2px;
+}
+.m-top .m-watch .u-unwatch {
+  display: inline-block;
+  position: relative;
+  margin: 0 14px 0 30px;
+  width: 84px;
+  height: 19px;
+  padding-left: 20px;
+  border: 1px solid #efefef;
+  background-color: #f8f8f8;
+}
+.m-top .m-watch .u-unwatch:hover {
+  background-color: #fff;
+}
+.m-top .m-watch .u-unwatch .radic {
+  position: absolute;
+  left: 2px;
+  top: 5px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("../../img/icon.png") no-repeat 0 -67px;
+}
+.m-top .m-watch .u-unwatch .watched {
+  cursor: default;
+}
+.m-top .m-watch .u-unwatch .cancel {
+  color: #999;
+}
+.m-top .m-watch .u-unwatch a:hover {
+  text-decoration: underline;
+  color: #21a557;
 }
 .m-top .m-search {
   height: 22px;
@@ -139,10 +170,13 @@ body, html {
 }
 .m-top .m-search .search {
   width: 20px;
-  height: 18px;
+  height: 19px;
   margin-left: 26px;
   background: url("../../img/icon.png") no-repeat 0 0;
   cursor: pointer;
+}
+.m-top .m-search .search:hover {
+  background-position: -23px 0;
 }
 
 .g-slide {
@@ -268,6 +302,7 @@ body, html {
   background-color: #fff;
   font: 20px/50px "microsoft yahei";
   text-align: center;
+  cursor: pointer;
 }
 .m-banner .u-tabs .tab.z-selected {
   background-color: #39a030;
@@ -346,6 +381,12 @@ body, html {
   padding: 18px;
   font: 14px "microsoft yahei";
 }
+.m-aside .panel .p_video .vbtn {
+  display: block;
+  height: 110px;
+  width: 180px;
+  background: url("../../img/pic1.jpg");
+}
 .m-aside .panel .hot_list {
   height: 730px;
   margin-top: -20px;
@@ -387,7 +428,6 @@ body, html {
 .m-detail {
   position: absolute;
   width: 480px;
-  height: 240px;
   border: 1px solid #c1c0c0;
   background-color: #fff;
   box-shadow: 0 0 1px #c1c0c0;
@@ -419,4 +459,36 @@ body, html {
   padding: 20px;
   background-color: #f8f8f8;
   font: 14px/24px "microsoft yahei";
+}
+
+/*登陆模块*/
+.m-login {
+  width: 294px;
+  height: 220px;
+  background-color: #fff;
+}
+.m-login .uname, .m-login .upwd {
+  display: block;
+  margin-bottom: 15px;
+  height: 43px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  width: 100%;
+  background-color: #fafafa;
+  border: 1px solid #dfdfdf;
+  box-shadow: inset 1px 1px #f1f1f1;
+}
+.m-login .title {
+  font: bold 18px/28px "microsoft yahei";
+  margin-bottom: 18px;
+}
+.m-login .submit {
+  display: block;
+  height: 46px;
+  width: 293px;
+  box-shadow: 1px 1px #d5e3da;
+  font: 16px "microsoft yahei";
+  color: #fff;
+  background: url("../../img/button.png");
+  border: none;
 }

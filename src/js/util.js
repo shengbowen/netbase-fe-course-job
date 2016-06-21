@@ -126,8 +126,46 @@ var util = (function(){
             return tempStr.replace(/\{\s+\$([^\s]+)\s+\}/g, function(a, b){
                 return dataObj[b]!==undefined ? dataObj[b] : "";
             });
-        }
+        },
 
+        //cookie相关
+        setCookie: function(name, value, expires, path, domain, secure){
+            var cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+            if(expires)
+                cookie += '; expires=' + expires.toGMTString();
+            if(path)
+                cookie += '; path=' + path;
+            if(domain)
+                cookie += '; domain=' +domain;
+            if(secure)
+                cookie += '; secure=' + secure;
+            document.cookie = cookie;
+        },
+
+        getCookie: function(){
+            var cookie = {};
+            var all = document.cookie;
+            if(all === "")
+                return cookie;
+            var list = all.split("; ");
+            for(var i=0;i<list.length; i++){
+                var item = list[i];
+                var p = item.indexOf('=');
+                var name = item.substring(0, p);
+                name = decodeURIComponent(name);
+                var value = item.substring(p+1);
+                value = decodeURIComponent(value);
+                cookie[name] = value;
+            }
+            return cookie;
+        },
+
+        removeCookie(name, path, domain){
+            document.cookie = name + '='
+            + '; path='+path
+            + '; domain='+domain
+            + '; max-age=0';
+        }
         
 
     }
