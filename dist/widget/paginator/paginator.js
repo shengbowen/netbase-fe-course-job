@@ -1,5 +1,17 @@
 /*
  * paginator
+ * 使用方法
+ * var pager = new Paginator({
+ *     container: .. ,//设置分页器容器
+ *     pageSize: .., //设置每页的条目数
+ *     totalPages: .., //总页数
+ *     currentPage：.., //当前页
+ *     onPageClicked：.., //点击页码的回掉
+ * });
+ *
+ * pager.show(num) //显示指定页
+ * pager.showPrev() //显示前一页
+ * pager.showNext() //显示后一页
  */
 
 ;(function(_){
@@ -10,18 +22,6 @@
         return container.children[0];
     }
 
-    // var template = ' <div class="m-pager"><a href="" class="pbn prev"></a> \
-    //                 <a href="" class="u-page page1"></a> \ 
-    //                 <span class="pleft pshow">...</span> \
-    //                 <a href="" class="u-page page2"></a> \
-    //                 <a href="" class="u-page page3"></a> \
-    //                 <a href="" class="u-page page4"></a> \
-    //                 <a href="" class="u-page page5"></a> \
-    //                 <a href="" class="u-page page6"></a> \
-    //                 <a href="" class="u-page page7"></a> \
-    //                 <span class="pright pshow">...</span> \
-    //                 <a href="" class="u-page page8"></a> \
-    //                 <a href="" class="pbn next"></a></div> ' ;
     var template = '<div class="m-pager" style="display: none">\
                         <a href="#courseinfo" class="pbn prev">&lt</a>\
                         <a href="#courseinfo" class="u-page page1"></a> \
@@ -49,7 +49,7 @@
 
         //组件节点
         this.pager = this._layout.cloneNode(true);
-        this.pages = [].slice.call(this.pager.querySelectorAll('.u-page'));
+        this.pages = _.slice(this.pager.querySelectorAll('.u-page'));
         this.prev = this.pager.querySelector('.prev');
         this.next = this.pager.querySelector('.next');
         this.lellipsis = this.pager.querySelector('.pleft');
@@ -158,7 +158,7 @@
         //为按钮添加事件
         _init: function(){
             var that = this;
-            this.prev.addEventListener('click', function(event){
+            util.addEvent(this.prev, 'click', function(event){
                 if(that.currentPage === 1){
                     if(event && event.preventDefault){
                          event.preventDefault(); 
@@ -168,7 +168,7 @@
                 }
                 that.showPrev();
             });
-            this.next.addEventListener('click', function(event){
+            util.addEvent(this.next,'click', function(event){
                 if(that.currentPage === that.totalPages){
                     if(event && event.preventDefault){
                          event.preventDefault(); 
@@ -179,7 +179,7 @@
                 that.showNext();
             });
             this.pages.forEach(function(page){
-                page.addEventListener('click', function(event){
+                util.addEvent(page, 'click', function(event){
                     var event = event || window.event;
                     var target = event.target || event.srcElement;
                     var num = parseInt(target.innerHTML);

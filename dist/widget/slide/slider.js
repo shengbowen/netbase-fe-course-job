@@ -52,7 +52,7 @@
 
         //组件节点
         this.slider = this._layout.cloneNode(true);
-        this.slides = [].slice.call(this.slider.querySelectorAll('.slide'));
+        this.slides = _.slice(this.slider.querySelectorAll('.slide'));
 
         this.pageNum = this.images.length;
 
@@ -87,7 +87,7 @@
 
         //自动播放
         autoPlay: function(){
-            //clearInterval(this.autoTimer);
+            clearInterval(this.autoTimer);
             var that = this;
             this.autoTimer = setInterval(function(){
                 that.next();

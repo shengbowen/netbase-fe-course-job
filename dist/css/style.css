@@ -64,7 +64,7 @@
 }
 
 /*
- *头部和提示信息样式
+ *头部g-hd 部分的样式
  */
 body, html {
   min-width: 960px;
@@ -92,6 +92,7 @@ body, html {
 
 .m-top {
   height: 90px;
+  /* 头部顶栏搜索部分 */
 }
 .m-top .m-logo .img {
   display: block;
@@ -129,6 +130,7 @@ body, html {
   padding-left: 20px;
   border: 1px solid #efefef;
   background-color: #f8f8f8;
+  /* √ 号图标 */
 }
 .m-top .m-watch .u-unwatch:hover {
   background-color: #fff;
@@ -140,7 +142,7 @@ body, html {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: url("../../img/icon.png") no-repeat 0 -67px;
+  background: url("../img/icon.png") no-repeat 0 -67px;
 }
 .m-top .m-watch .u-unwatch .watched {
   cursor: default;
@@ -173,13 +175,14 @@ body, html {
   width: 20px;
   height: 19px;
   margin-left: 26px;
-  background: url("../../img/icon.png") no-repeat 0 0;
+  background: url("../img/icon.png") no-repeat 0 0;
   cursor: pointer;
 }
 .m-top .m-search .search:hover {
   background-position: -23px 0;
 }
 
+/* 头部轮播图部分 */
 .g-slide {
   height: 460px;
 }
@@ -212,6 +215,7 @@ body, html {
   right: 20px;
 }
 
+/* 头部图片展示区部分 */
 .m-photos {
   height: 220px;
 }
@@ -227,8 +231,9 @@ body, html {
   height: 220px;
 }
 
+/* 头部了解更多部分 */
 .g-parent-fix {
-  margin-left: -80px;
+  margin-left: -70px;
   padding: 54px 0;
 }
 
@@ -239,14 +244,14 @@ body, html {
 }
 .m-info .column {
   display: table-cell;
-  padding-left: 80px;
+  padding-left: 70px;
 }
 .m-info .info_icon {
   display: block;
   margin-top: 10px;
   width: 80px;
   height: 80px;
-  background: url("../../img/info-icon.png") no-repeat -9999px -9999px;
+  background: url("../img/info-icon.png") no-repeat -9999px -9999px;
 }
 .m-info .open163 {
   background-position: 0 0;
@@ -258,7 +263,7 @@ body, html {
   background-position: 0 -220px;
 }
 .m-info .info_art {
-  margin-left: 112px;
+  margin-left: 105px;
 }
 .m-info h2 {
   font: 22px "microsoft yahei";
@@ -278,6 +283,69 @@ body, html {
   margin-top: 80px;
 }
 
+/*主内容侧边栏样式*/
+.m-aside {
+  width: 226px;
+}
+.m-aside .panel {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-top: none;
+  box-shadow: 0 1px #ccc;
+  background-color: #fff;
+}
+.m-aside .panel:hover {
+  box-shadow: 0 0 2px grey;
+}
+.m-aside .panel .p_title {
+  height: 54px;
+  padding: 0 18px;
+  border-bottom: 1px solid #ccc;
+  font: 16px/54px "microsoft yahei";
+}
+.m-aside .panel .p_video {
+  padding: 18px;
+  font: 14px "microsoft yahei";
+}
+.m-aside .panel .p_video .vbtn {
+  display: block;
+  height: 110px;
+  width: 180px;
+  background: url("../img/video.jpg");
+}
+.m-aside .panel .hot_list {
+  height: 730px;
+  margin-top: -20px;
+}
+.m-aside .panel .list_item {
+  margin-top: 20px;
+  height: 53px;
+}
+.m-aside .panel .item_info {
+  margin-left: 60px;
+}
+.m-aside .panel .item_info h3 {
+  font: 14px "microsoft yahei";
+}
+.m-aside .panel .item_info .like {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font: 14px "microsoft yahei";
+  color: #999;
+}
+.m-aside .panel .item_info .like .user_icon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: url("../img/icon.png") 0 -24px;
+}
+
+.m-hotscroll {
+  height: 730px;
+  margin: 20px 18px 0;
+}
+
+/* 主内容区课程卡片展示区 */
 .m-banner .m-courses {
   width: 100%;
 }
@@ -331,10 +399,12 @@ body, html {
   height: 124px;
 }
 .m-courses .img .pic {
+  -webkit-transition: all 1s ease 0s;
   transition: all 1s ease 0s;
 }
 .m-courses .img .pic:hover {
-  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 .m-courses .title {
   display: block;
@@ -355,12 +425,13 @@ body, html {
   margin-bottom: 8px;
   border: 1px solid #ccc;
   border-radius: 2px;
+  padding-right: 2px;
 }
 .m-courses .course_info .like .user_icon {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: url("../../img/icon.png") 0 -24px;
+  background: url("../img/icon.png") 0 -24px;
 }
 .m-courses .course_info .price {
   margin-bottom: 10px;
@@ -368,69 +439,7 @@ body, html {
   font-weight: bold;
 }
 
-/*主内容侧边栏样式*/
-.m-aside {
-  width: 226px;
-}
-.m-aside .panel {
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-top: none;
-  box-shadow: 0 1px #ccc;
-  background-color: #fff;
-}
-.m-aside .panel:hover {
-  box-shadow: 0 0 2px grey;
-}
-.m-aside .panel .p_title {
-  height: 54px;
-  padding: 0 18px;
-  border-bottom: 1px solid #ccc;
-  font: 16px/54px "microsoft yahei";
-}
-.m-aside .panel .p_video {
-  padding: 18px;
-  font: 14px "microsoft yahei";
-}
-.m-aside .panel .p_video .vbtn {
-  display: block;
-  height: 110px;
-  width: 180px;
-  background: url("../../img/video.jpg");
-}
-.m-aside .panel .hot_list {
-  height: 730px;
-  margin-top: -20px;
-}
-.m-aside .panel .list_item {
-  margin-top: 20px;
-  height: 53px;
-}
-.m-aside .panel .item_info {
-  margin-left: 60px;
-}
-.m-aside .panel .item_info h3 {
-  font: 14px "microsoft yahei";
-}
-.m-aside .panel .item_info .like {
-  margin-top: 8px;
-  margin-bottom: 8px;
-  font: 14px "microsoft yahei";
-  color: #999;
-}
-.m-aside .panel .item_info .like .user_icon {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  background: url("../../img/icon.png") 0 -24px;
-}
-
-.m-hotscroll {
-  height: 730px;
-  margin: 20px 18px 0;
-}
-
-/*分页器样式*/
+/*分页器包裹层样式*/
 .m-pagewapper {
   margin-right: 25px;
 }
@@ -461,7 +470,7 @@ body, html {
   display: inline-block;
   width: 10px;
   height: 10px;
-  background: url("../../img/icon.png") 0 -24px;
+  background: url("../img/icon.png") 0 -24px;
 }
 .m-detail .intro .learn {
   margin: 7px 0 7px;
@@ -500,10 +509,11 @@ body, html {
   box-shadow: 1px 1px #d5e3da;
   font: 16px "microsoft yahei";
   color: #fff;
-  background: url("../../img/button.png");
+  background: url("../img/button.png");
   border: none;
 }
 
+/* 页面foot部分 */
 .g-ft {
   margin-top: 118px;
   height: 262px;
@@ -521,7 +531,7 @@ body, html {
 .g-ft .info .logo {
   margin-top: 5px;
   margin-bottom: 32px;
-  background: url("../../img/logo2.png") no-repeat 0 -12px;
+  background: url("../img/logo2.png") no-repeat 0 -12px;
   width: 250px;
   height: 28px;
 }
@@ -551,7 +561,7 @@ body, html {
   display: inline-block;
   width: 25px;
   height: 20px;
-  background: url("../../img/icon.png") no-repeat 0 -40px;
+  background: url("../img/icon.png") no-repeat 0 -40px;
 }
 .g-ft .more {
   margin-left: 66px;

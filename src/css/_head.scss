@@ -1,5 +1,5 @@
 /*
- *头部和提示信息样式
+ *头部g-hd 部分的样式
  */
 
 body, html{
@@ -68,6 +68,7 @@ body, html{
             &:hover{
                 background-color: #fff;
             }
+            /* √ 号图标 */
             .radic{
                 position: absolute;
                 left: 2px;
@@ -75,7 +76,7 @@ body, html{
                 display: inline-block;
                 width: 20px;
                 height: 20px;
-                background: url('../../img/icon.png') no-repeat 0 -67px;
+                background: url('../img/icon.png') no-repeat 0 -67px;
             }
             .watched{
                 cursor: default;
@@ -90,7 +91,7 @@ body, html{
         }
     }
     
-
+    /* 头部顶栏搜索部分 */
     .m-search{
         height:22px;
         line-height:22px;
@@ -111,7 +112,7 @@ body, html{
             width: 20px;
             height: 19px;
             margin-left: 26px;
-            background: url('../../img/icon.png') no-repeat 0 0;
+            background: url('../img/icon.png') no-repeat 0 0;
             cursor: pointer;
             &:hover{
                 background-position: -23px 0;
@@ -120,6 +121,7 @@ body, html{
     }
 }
 
+/* 头部轮播图部分 */
 .g-slide{
     height: 460px;
     &:hover .u-arrow{
@@ -149,7 +151,7 @@ body, html{
     
 }
 
-
+/* 头部图片展示区部分 */
 .m-photos{
     height: 220px;
     .list{
@@ -165,8 +167,12 @@ body, html{
     }   
 }
 
+
+/* 头部了解更多部分 */
+
+//实现3栏居中自适应平分
 .g-parent-fix{
-    margin-left: -80px;
+    margin-left: -70px; //将外层父容器拉伸80px，保证子元素都能padding-left：80px，仍保持居中
     padding: 54px 0;
 }
 
@@ -177,7 +183,7 @@ body, html{
 
     .column{
         display: table-cell;
-        padding-left: 80px;
+        padding-left: 70px;
     }
 
     .info_icon{
@@ -185,7 +191,7 @@ body, html{
         margin-top: 10px;
         width: 80px;
         height: 80px;
-        background: url('../../img/info-icon.png') no-repeat -9999px -9999px;
+        background: url('../img/info-icon.png') no-repeat -9999px -9999px;
     }
     .open163{
         background-position: 0 0;
@@ -197,7 +203,7 @@ body, html{
         background-position: 0 -220px;
     }
     .info_art{
-        margin-left: 112px;
+        margin-left: 105px;
     }
     h2{
         font: 22px $YAHEI;
