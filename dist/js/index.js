@@ -403,7 +403,7 @@
 
             //解决Chrome切换tab页导致动画暂停，切换回来后动画错误的问题
             var scroll_control = setInterval(function(){animate(-73);}, 5000); //每隔5秒执行一次滚动动画
-            浏览器tab页获得焦点时重新执行动画
+            //浏览器tab页获得焦点时重新执行动画
             _.addEvent(window,'focus', function(){
                 clearInterval(scroll_control);
                 scroll_control = setInterval(function(){animate(-73);}, 5000);
